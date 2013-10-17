@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="pag" basedir="." default="test">
+  <target name="test">
+    <mkdir dir="test" />
+    <mkdir dir="report" />
+    <mkdir dir="report/coverage" />
+    <coverage-setup database="report/coverage.db">
+      <fileset dir="src">
+        <include name="*.php" />
+        <include name="**/*.php" />
+      </fileset>
+    </coverage-setup>
+    <phpunit codecoverage="true" haltonfailure="true" printsummary="true" bootstrap="test/bootstrap.php">
+      <formatter type="xml" outfile="report/coverage.xml" />
+      <formatter type="clover" outfile="report/clover.xml" />
+      <batchtest>
+        <fileset dir="test">
+          <include name="*Test.php" />
+          <include name="**/*Test.php" />
+        </fileset>
+      </batchtest>
+    </phpunit>
+    <coverage-report outfile="report/coverage.db">
+      <report todir="report/coverage" />
+    </coverage-report>
+  </target>
+
+  <!-- source code duplidate check -->
+  <target name="phpcpd">
+    <phpcpd minTokens="8">
+      <fileset dir="src">
+        <include name="**/*.php" />
+      </fileset>
+      <formatter type="pmd" outfile="report/cpd.xml" />
+    </phpcpd>
+  </target>
+
+  <!-- php md unused source codes -->
+  <target name="phpmd">
+    <phpmd rulesets="ruleset.xml">
+      <fileset dir="src">
+        <include name="**/*.php" />
+      </fileset>
+      <formatter type="xml" outfile="report/pmd.xml" />
+    </phpmd>
+  </target>
+
+  <!-- phpdoc -->
+  <target name="phpdoc">
+    <mkdir dir="doc" />
+    <phpdoc title="pag api documentation" destdir="./doc" output="HTML:Smarty:PHP">
+      <fileset dir="src">
+        <include name="**/*.php" />
+      </fileset>
+    </phpdoc>
+  </target>
+
+</project>

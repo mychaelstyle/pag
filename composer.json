@@ -1,0 +1,26 @@
+{
+  "name":"mychaelstyle/pag",
+  "description": "PHP MOC(MVC) framework.",
+  "keywords": ["MVC","Framework","Simple","PAG"],
+  "type": "library",
+  "license": "Apache2",
+  "authers": [
+    {
+      "name":"Masanori Nakashima",
+      "email":"",
+      "homepage":"http://www.mychaelstyle.com/"
+    }
+  ],
+  "require": {
+    "aws/aws-sdk-php": "2.*"
+  },
+  "require-dev":{
+    "phpunit/phpunit": "3.*",
+    "phing/phing": "2.*"
+  },
+  "autoload":{
+    "psr-0":{
+      "pag": "src/"
+    }
+  }
+}
